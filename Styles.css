@@ -1,0 +1,1071 @@
+
+        :root {
+            --bg-primary: linear-gradient(135deg, #509fe0 0%, #cf2fdd 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.95);
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --widget-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: #f8f9fa;
+            --input-border: #e9ecef;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --primary-color: #1e3c72;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #11113c 0%, #39133f 100%);
+            --bg-secondary: rgba(30, 30, 30, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #b0b0b0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --widget-bg: rgba(40, 40, 40, 0.95);
+            --input-bg: #2a2a2a;
+            --input-border: #444;
+            --success-color: #20c997;
+            --danger-color: #fd7e14;
+            --primary-color: #4a90e2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5rem;
+            font-weight: 320;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-icon {
+            font-size: 1rem;
+        }
+
+        .theme-text {
+            font-size: 0.8rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background: var(--widget-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+
+        .widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            opacity: 0.8;
+        }
+
+        .widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .widget h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .widget h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 1px;
+        }
+
+        /* Calculator Styles */
+        .calculator-widget {
+            background: var(--widget-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            transform: none;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .calculator {
+            width: 100%;
+        }
+
+        .display {
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 15px;
+            color: var(--success-color);
+            font-size: 2rem;
+            font-weight: 400;
+            height: 70px;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            text-align: right;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            color: #333;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            height: 50px;
+            transition: all 0.2s ease;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.operator {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .btn.operator:hover {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+        }
+
+        .btn.equals {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn.equals:hover {
+            background: linear-gradient(135deg, #20c997, #28a745);
+        }
+
+        .btn.clear {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+            color: white;
+        }
+
+        .btn.clear:hover {
+            background: linear-gradient(135deg, #fd7e14, #dc3545);
+        }
+
+        .btn.zero {
+            grid-column: span 2;
+        }
+
+        .btn:not(.operator):not(.equals):not(.clear) {
+            display: flex !important;
+        }
+
+        .btn {
+            display: flex !important;
+        }
+
+        /* Todo List Widget */
+        .todo-widget {
+            background: var(--widget-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .todo-container {
+            width: 100%;
+        }
+
+        .todo-input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .todo-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: var(--widget-bg);
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+        }
+
+        .todo-add-btn {
+            background: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .todo-add-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .todo-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .filter-btn:hover {
+            background: #e9ecef;
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .todo-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: var(--input-bg);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--input-border);
+            color: var(--text-primary);
+        }
+
+        .todo-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .todo-item.completed {
+            opacity: 0.7;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            background: var(--widget-bg);
+            color: var(--primary-color);
+        }
+
+        .todo-checkbox.checked {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .todo-checkbox.checked::after {
+            content: '✓';
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 1rem;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+
+        .todo-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-top: 1px solid #e9ecef;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .clear-completed-btn {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .clear-completed-btn:hover {
+            color: var(--danger-color);
+        }
+
+        .todo-empty {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 40px 20px;
+        }
+
+        /* Weather Widget */
+        .weather-info {
+            text-align: center;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .weather-icon {
+            font-size: 3rem;
+        }
+
+        .temperature {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .weather-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            text-transform: capitalize;
+        }
+
+        .location-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 5px;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .weather-detail {
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .weather-detail strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .weather-detail span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Time Widget */
+        .time-display {
+            text-align: center;
+        }
+
+        .current-time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .date-display {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .timezone-info {
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .timezone-info strong {
+            color: var(--text-primary);
+        }
+
+        /* Location Widget */
+        .location-info {
+            text-align: left;
+        }
+
+        .location-detail {
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .location-detail strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .location-detail span {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Timer Widget */
+        .timer-display {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timer-input {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .timer-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .control-btn {
+            flex: 1;
+            background: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .control-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Stopwatch Widget */
+        .stopwatch-display {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stopwatch-controls {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .stopwatch-btn {
+            flex: 1;
+            background: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .stopwatch-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .stopwatch-btn.stop {
+            background: var(--danger-color);
+        }
+
+        .stopwatch-btn.stop:hover {
+            background: #c82333;
+        }
+
+        .laps {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .lap {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Time Tracker Styles */
+        .tt-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .tt-tab-btn {
+            background: #f8f9fa;
+            border: 1.5px solid var(--input-border);
+            border-radius: 10px 10px 0 0;
+            padding: 8px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .tt-tab-btn.active,
+        .tt-tab-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+            border-bottom: 2.5px solid var(--primary-color);
+        }
+
+        .tt-mode {
+            display: none;
+        }
+
+        .tt-mode.active {
+            display: block !important;
+        }
+
+        .pomodoro-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pomodoro-status {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .pomodoro-timer {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 8px;
+        }
+
+        .pomodoro-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pomodoro-input input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .pomodoro-input span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .pomodoro-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pomodoro-btn {
+            background: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .pomodoro-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .pomodoro-session-info {
+            display: flex;
+            gap: 24px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .clockinout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .clockinout-status {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .clockinout-timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 8px;
+        }
+
+        .clockinout-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .clock-btn {
+            background: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .clock-btn:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .clock-btn:hover:not(:disabled) {
+            background: var(--primary-color);
+        }
+
+        .clockinout-log {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .clockinout-log h4 {
+            font-size: 1.05rem;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .clock-log-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .clock-log-list li {
+            padding: 3px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Loading and Error States */
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .error {
+            color: #dc3545;
+            text-align: center;
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+        }
+
+        .weather-api-info {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr 350px 1fr;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .center-column {
+                grid-column: 1 / -1;
+                order: -1;
+            }
+            
+            .calculator-widget {
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 15px;
+            }
+            
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .widget {
+                padding: 20px;
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
+            
+            .weather-main {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .current-time, .timer-display, .stopwatch-display {
+                font-size: 2rem;
+            }
+            
+            .temperature {
+                font-size: 2rem;
+            }
+            
+            .timer-input {
+                flex-direction: column;
+            }
+            
+            .weather-details {
+                grid-template-columns: 1fr;
+            }
+            .center-column, .left-column, .right-column {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-container {
+                padding: 5px;
+            }
+            .widget {
+                padding: 10px;
+                border-radius: 12px;
+            }
+            .display {
+                font-size: 1.1rem;
+                height: 40px;
+                padding: 6px 8px;
+            }
+            .btn {
+                height: 36px;
+                font-size: 0.95rem;
+                border-radius: 8px;
+            }
+            .buttons {
+                gap: 5px;
+            }
+            .todo-input, .todo-add-btn {
+                font-size: 0.95rem;
+                padding: 8px 10px;
+                border-radius: 7px;
+            }
+            .todo-item {
+                padding: 8px;
+                border-radius: 7px;
+            }
+            .todo-checkbox {
+                width: 18px;
+                height: 18px;
+            }
+            .todo-list {
+                max-height: 180px;
+            }
+            .timer-input input {
+                font-size: 0.95rem;
+                padding: 7px;
+                border-radius: 6px;
+            }
+            .timer-controls, .stopwatch-controls {
+                gap: 5px;
+            }
+            .control-btn, .stopwatch-btn {
+                padding: 8px;
+                font-size: 0.95rem;
+                border-radius: 6px;
+            }
+            .laps {
+                max-height: 100px;
+            }
+            .lap {
+                padding: 6px;
+                border-radius: 6px;
+                font-size: 0.95rem;
+            }
+            .weather-detail, .timezone-info, .location-detail {
+                padding: 7px;
+                border-radius: 6px;
+                font-size: 0.95rem;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .header h2 {
+                font-size: 1rem;
+            }
+        }

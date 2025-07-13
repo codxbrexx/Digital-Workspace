@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles.css">
+    <title>My Space</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>My Digital Workspace</h1>
+                </div>
+                <div class="theme-toggle">
+                    <button type="button" id="themeToggle" class="theme-btn">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text">Dark Mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="widget time-tracker-widget">
+                    <!-- Time Tracker Widget -->
+                    <h2>⏳ Time Tracker</h2>
+                    <div class="tt-tabs">
+                        <button class="tt-tab-btn active" data-mode="pomodoro" type="button" onclick="switchTTMode('pomodoro')">Pomodoro</button>
+                        <button class="tt-tab-btn" data-mode="clock" type="button" onclick="switchTTMode('clock')">Clock-in/Out</button>
+                    </div>
+                    <div class="tt-modes">
+                        <div id="ttPomodoroMode" class="tt-mode active">
+                            <div class="pomodoro-container">
+                                <div class="pomodoro-status" id="pomodoroStatus">Work</div>
+                                <div class="pomodoro-timer" id="pomodoroTimer">25:00</div>
+                                <div class="pomodoro-input">
+                                    <input type="number" id="pomodoroMinutes" placeholder="25" min="1" max="60" value="25">
+                                    <span>minutes</span>
+                                </div>
+                                <div class="pomodoro-controls">
+                                    <button type="button" class="pomodoro-btn" id="pomodoroToggleBtn" onclick="togglePomodoro()">Start</button>
+                                    <button type="button" class="pomodoro-btn" onclick="resetPomodoro()">Reset</button>
+                                </div>
+                                <div class="pomodoro-session-info">
+                                    <span>Session: <span id="pomodoroSessionCount">0</span></span>
+                                    <span>Break: <span id="pomodoroBreakCount">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ttClockMode" class="tt-mode" style="display:none;">
+                            <div class="clockinout-container">
+                                <div class="clockinout-status" id="clockStatus">Not clocked in</div>
+                                <div class="clockinout-timer" id="clockTimer">00:00:00</div>
+                                <div class="clockinout-controls">
+                                    <button type="button" class="clock-btn" id="clockInBtn" onclick="clockIn()">Clock In</button>
+                                    <button type="button" class="clock-btn" id="clockOutBtn" onclick="clockOut()" disabled>Clock Out</button>
+                                </div>
+                                <div class="clockinout-log">
+                                    <h4>Today's Log</h4>
+                                    <ul id="clockLogList" class="clock-log-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Stopwatch Widget -->
+                <div class="widget">
+                    <h2>⏲️ Stopwatch</h2>
+                    <div class="stopwatch-display" id="stopwatchDisplay">00:00:00:00</div>
+                    <div class="stopwatch-controls">
+                        <button type="button" class="stopwatch-btn" id="stopwatchToggleBtn" onclick="toggleStopwatch()">Start</button>
+                        <button type="button" class="stopwatch-btn" onclick="resetStopwatch()">Reset</button>
+                        <button type="button" class="stopwatch-btn" onclick="lapStopwatch()">Lap</button>
+                    </div>
+                    <div class="laps" id="laps"></div>
+                </div>
+                <!-- Timer Widget -->
+                <div class="widget">
+                    <h2>⏱️ Timer</h2>
+                    <div class="timer-display" id="timerDisplay">00:00:00</div>
+                    <div class="timer-input">
+                        <input type="number" id="timerHours" placeholder="Hours" min="0" max="23" value="0">
+                        <input type="number" id="timerMinutes" placeholder="Minutes" min="0" max="59" value="5">
+                        <input type="number" id="timerSeconds" placeholder="Seconds" min="0" max="59" value="0">
+                    </div>
+                    <div class="timer-controls">
+                        <button type="button" class="control-btn" id="timerToggleBtn" onclick="toggleTimer()">Start</button>
+                        <button type="button" class="control-btn" onclick="resetTimer()">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column -->
+            <div class="center-column">
+                <!-- Calculator Widget -->
+                <div class="widget calculator-widget">
+                    <h2>🧮 Calculator</h2>
+                    <div class="calculator">
+                        <input type="text" class="display" id="display" value="0" readonly>
+                        <div class="buttons">
+                            <button type="button" class="btn clear" onclick="clearDisplay()">C</button>
+                            <button type="button" class="btn" onclick="backspace()">⌫</button>
+                            <button type="button" class="btn operator" onclick="inputOperator('%')">%</button>
+                            <button type="button" class="btn operator" onclick="inputOperator('÷')">÷</button>
+
+                            <button type="button" class="btn" onclick="inputNumber('7')">7</button>
+                            <button type="button" class="btn" onclick="inputNumber('8')">8</button>
+                            <button type="button" class="btn" onclick="inputNumber('9')">9</button>
+                            <button type="button" class="btn operator" onclick="inputOperator('×')">×</button>
+
+                            <button type="button" class="btn" onclick="inputNumber('4')">4</button>
+                            <button type="button" class="btn" onclick="inputNumber('5')">5</button>
+                            <button type="button" class="btn" onclick="inputNumber('6')">6</button>
+                            <button type="button" class="btn operator" onclick="inputOperator('-')">-</button>
+
+                            <button type="button" class="btn" onclick="inputNumber('1')">1</button>
+                            <button type="button" class="btn" onclick="inputNumber('2')">2</button>
+                            <button type="button" class="btn" onclick="inputNumber('3')">3</button>
+                            <button type="button" class="btn operator" onclick="inputOperator('+')">+</button>
+
+                            <button type="button" class="btn zero" onclick="inputNumber('0')">0</button>
+                            <button type="button" class="btn" onclick="inputNumber('.')">.</button>
+                            <button type="button" class="btn equals" onclick="calculate()">=</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Todo List Widget -->
+                <div class="widget todo-widget">
+                    <h2>📝 Todo List</h2>
+                    <div class="todo-container">
+                        <div class="todo-input-section">
+                            <input type="text" id="todoInput" placeholder="Add a new task..." class="todo-input">
+                            <button type="button" class="todo-add-btn" onclick="addTodo()">Add</button>
+                        </div>
+                        <div class="todo-filters">
+                            <button type="button" class="filter-btn active" onclick="filterTodos('all')">All</button>
+                            <button type="button" class="filter-btn" onclick="filterTodos('active')">Active</button>
+                            <button type="button" class="filter-btn" onclick="filterTodos('completed')">Completed</button>
+                        </div>
+                        <div class="todo-list" id="todoList">
+                        </div>
+                        <div class="todo-stats">
+                            <span id="todoCount">0 tasks</span>
+                            <button type="button" class="clear-completed-btn" onclick="clearCompleted()">Clear Completed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Time Widget -->
+                <div class="widget">
+                    <h2>⏰ Current Time</h2>
+                    <div class="time-display">
+                        <div class="current-time" id="currentTime">00:00:00</div>
+                        <div class="date-display" id="currentDate">Loading...</div>
+                        <div class="timezone-info">
+                            <strong>Timezone:</strong> <span id="timezone">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Weather Widget -->
+                <div class="widget">
+                    <h2>🌤️ Weather</h2>
+                    <div class="weather-info" id="weatherInfo">
+                        <div class="loading">Loading weather data...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript file -->
+    <script src="Styles.js"></script>
+</body>
+</html>
